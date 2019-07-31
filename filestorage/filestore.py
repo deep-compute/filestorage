@@ -2,6 +2,7 @@ import hashlib
 import os
 import gzip
 
+
 class FileStore(object):
     def __init__(self, dirpath, compress=False):
         self.dirpath = dirpath
@@ -23,12 +24,13 @@ class FileStore(object):
         dpath, fpath = self._getpath(key)
         try:
             os.makedirs(dpath)
-        except: pass
+        except:
+            pass
 
         if self.compress:
-            gzip.open(fpath, 'wb').write(value)
+            gzip.open(fpath, "wb").write(value)
         else:
-            open(fpath, 'wb').write(value)
+            open(fpath, "wb").write(value)
 
     def put_file(self, key, fpath):
         dpath, _fpath = self._getpath(key)
@@ -37,7 +39,7 @@ class FileStore(object):
 
     def get(self, key):
         _, fpath = self._getpath(key)
-        return open(fpath, 'rb').read()
+        return open(fpath, "rb").read()
 
     def get_file(self, key):
         _, fpath = self._getpath(key)
